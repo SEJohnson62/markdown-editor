@@ -5,16 +5,17 @@ import marked from 'marked';
 function App() {
   const [ text, setText ] = useState('First &middot; Second');
   function createMarkup() {
-    return {__html: text};
+    return {__html: marked(text)};
   }
 
   function MyComponent() {
-    return <div dangerouslySetInnerHTML={createMarkup()} />;
+    return <div id='translated' dangerouslySetInnerHTML={createMarkup()} />;
   }
 
   return (
     <div className="App">
       <h2>Markdown Editor</h2>
+      <input type='text' onChange={(ev)=>{setText(ev.target.value)}}/>
       <MyComponent/>
     </div>
   );
